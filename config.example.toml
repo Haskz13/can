@@ -1,0 +1,11 @@
+# Copy to config.toml and tune to what you sell.
+max_age_days = 45        # ignore bids published longer ago than this
+min_days_left = 5        # skip bids closing sooner than this
+max_days_left = 180
+early_signal_days = 120  # RFIs / ACANs / supply arrangements stay relevant this long
+min_score = 40
+
+focus = ["leadership", "cybersecurity", "project management"]   # your training topics
+exclude = ["explosive", "firearm"]
+provinces = []           # e.g. ["Ontario", "Quebec"]; empty = all
+buyers = []              # boost specific departments, e.g. ["Canada School of Public Service"]

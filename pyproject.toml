@@ -1,0 +1,12 @@
+[project]
+name = "leadgen"
+version = "0.1.0"
+description = "Canadian public sector training-opportunity lead generator"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+leadgen = "leadgen.cli:main"
+
+[tool.setuptools]
+packages = ["leadgen", "leadgen.sources"]
