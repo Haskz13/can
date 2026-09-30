@@ -19,6 +19,10 @@ class Config:
     provinces: list[str] = field(default_factory=list)  # empty = all
     buyers: list[str] = field(default_factory=list)     # substring match; boost, not filter
     cache_dir: str = "data"
+    sources: list[str] = field(default_factory=lambda: ["canadabuys", "seao"])
+    seao_weeks: int = 7             # weekly SEAO files to read (~18 MB each)
+    import_dir: str = "imports"     # CSV exports from MERX / Biddingo / Tenders On Time etc.
+    import_columns: dict[str, list[str]] = field(default_factory=dict)  # extra column aliases
 
 
 def load(path: str | None) -> Config:

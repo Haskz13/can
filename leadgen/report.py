@@ -8,14 +8,14 @@ from pathlib import Path
 
 from .models import Lead
 
-COLS = ["tier", "score", "stage", "title", "buyer", "province", "notice_type", "published", "closing",
+COLS = ["tier", "score", "stage", "source", "title", "buyer", "province", "notice_type", "published", "closing",
         "days_left", "est_value", "contract_start", "contract_end", "contact_name", "contact_email",
         "contact_phone", "url", "why"]
 
 
 def _row(l: Lead) -> dict:
     o = l.opp
-    return {"tier": l.tier, "score": l.score, "stage": l.stage, "title": o.title, "buyer": o.buyer,
+    return {"tier": l.tier, "score": l.score, "stage": l.stage, "source": o.source, "title": o.title, "buyer": o.buyer,
             "province": o.province, "notice_type": o.notice_type, "published": o.published or "",
             "closing": o.closing.strftime("%Y-%m-%d %H:%M") if o.closing else "",
             "days_left": "" if l.days_left is None else l.days_left,
@@ -47,7 +47,7 @@ def write_html(leads: list[Lead], path: Path) -> None:
         rows.append(
             f'<tr class="t{r["tier"]}"><td>{r["tier"]}</td><td>{r["score"]}</td><td>{e(r["stage"])}</td>'
             f'<td><a href="{e(r["url"])}" target="_blank" rel="noopener">{e(r["title"])}</a>'
-            f'<div class="why">{e(r["why"])}</div></td><td>{e(r["buyer"])}<br><small>{e(r["province"])}</small></td>'
+            f'<div class="why">{e(r["why"])}</div></td><td>{e(r["buyer"])}<br><small>{e(r["province"])} · {e(r["source"])}</small></td>'
             f'<td>{e(r["notice_type"])}</td><td>{r["closing"][:10]}</td><td>{r["days_left"]}</td>'
             f'<td>{"" if r["est_value"] == "" else "$" + format(r["est_value"], ",")}</td><td>{contact}</td></tr>')
     path.write_text(f"""<!doctype html><meta charset="utf-8"><title>Training leads {date.today()}</title>

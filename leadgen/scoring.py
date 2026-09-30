@@ -20,14 +20,14 @@ KEYWORDS = {
     r"\bprofessional development\b": 12, r"\bd[ée]veloppement professionnel": 12, r"\bcertification\b": 6,
     r"\binstructors?\b": 8, r"\binstruct(?:ion|eurs?)\b": 6, r"\bworkshop\b": 4, r"\bseminars?\b": 6,
     r"\bleadership development\b": 10, r"\bupskill|reskill": 8, r"\bcompetenc(?:y|ies)\b": 3, r"\bwebinars?\b": 5,
-    r"\bknowledge transfer\b": 6, r"\bawareness (?:program|session|training)": 8, r"\bmentor": 4,
+    r"\bknowledge transfer\b": 6, r"\bawareness (?:program|session|training)": 8, r"\bmentor": 4, r"perfectionnement": 10, r"\baccompagnement\b": 4, r"\bapprentissage\b": 6, r"\bsensibilisation\b": 6, r"\bformateurs?\b": 8,
 }
 # UNSPSC segment/family prefixes that denote training/education
 UNSPSC_TRAINING = ("8610", "8611", "8612", "8613", "8614", "9315")  # 8610 education/training services, 8613 = ed. facilities
 GSIN_TRAINING = ("U",)  # GSIN group U = educational & training services
 
 # Classic false positives: physical/animal/equipment "training" that is not a service you'd sell
-NEGATIVE = [r"\btraining (?:centre|center|area|theatre|theater|complex|building)\b", r"\bconstruction\b|\bsoftware develop|\bmaintenance services\b",r"\bhorse|equine|farrier|canine|k-?9\b", r"\btraining (?:aircraft|ammunition|ammo|range|facility)\b",
+NEGATIVE = [r"\bachat d|\bfourniture d[eu]|\bmission d.audit|\bétats financiers", r"\btraining (?:centre|center|area|theatre|theater|complex|building)\b", r"\bconstruction\b|\bsoftware develop|\bmaintenance services\b",r"\bhorse|equine|farrier|canine|k-?9\b", r"\btraining (?:aircraft|ammunition|ammo|range|facility)\b",
             r"\bsimulator\b", r"\bexplosive"]
 
 EARLY_TYPES = ("request for information", "advance contract award", "invitation to qualify",

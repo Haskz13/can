@@ -23,3 +23,20 @@ Tier A ≥ 70, B ≥ 55, C otherwise.
 ## Limits / next steps
 - Only CanadaBuys today. Provincial and municipal portals (MERX, BC Bid, SEAO, Alberta Purchasing Connection, Ontario Tenders Portal) plug in as new modules in `leadgen/sources/` returning `Opportunity` objects.
 - Award notices / contract history (incumbent, value, expiry → re-compete forecasting) would add real dollar values.
+
+## Provincial and multi-portal coverage
+`python -m leadgen --portals` lists every federal, provincial, territorial and municipal portal and how it is covered.
+
+| Coverage | Portals |
+|---|---|
+| **Automatic** | CanadaBuys (federal), SEAO (Québec, incl. municipalities, school boards, health networks) |
+| **Via CSV import** | Ontario, BC Bid, Alberta, Saskatchewan, Manitoba, NB, NS, PEI, NL, territories, plus MERX, Biddingo, Bids&Tenders, BIDS Alert and Tenders On Time |
+
+The other provinces publish no open tender feed (Ontario and BC sit behind JavaScript/browser checks, NL and Manitoba
+post on MERX, and PEI/Yukon block automated access). leadgen does not try to bypass those protections.
+Instead, set up a saved search (keywords like *training, formation, workshop, coaching, e-learning*, UNSPSC 8610xxxx) on
+each portal or aggregator, export the results to CSV, and drop the files in `imports/`. Columns are matched by name
+(`Title`, `Organization`, `Closing Date`, …); add aliases under `[import_columns]` in `config.toml` if an export uses others.
+Imported rows are scored, de-duplicated against the automatic feeds, and ranked together.
+
+Quebec reads ~7 weekly files (~18 MB each) on first run; later runs only refresh the current week. Use `--sources canadabuys` for a fast federal-only run.
